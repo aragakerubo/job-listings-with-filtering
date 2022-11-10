@@ -16,6 +16,7 @@ export const SearchBar = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 	padding: 0.85em 2em;
 	width: 80%;
 	max-width: 1110px;
