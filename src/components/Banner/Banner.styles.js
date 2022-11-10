@@ -16,7 +16,6 @@ export const SearchBar = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	flex-wrap: wrap;
 	padding: 0.85em 2em;
 	width: 80%;
 	max-width: 1110px;
@@ -36,6 +35,7 @@ export const Container = styled.div`
 	display: flex;
 	justify-content: start;
 	align-items: center;
+	flex-wrap: wrap;
 	gap: 0.75em;
 	width: 45%;
 `;
