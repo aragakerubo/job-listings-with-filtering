@@ -8,26 +8,96 @@ import {
 	Search,
 	Clear,
 	Filter,
+	Suggestions,
+	ErrorMsg,
 } from "./Banner.styles";
 import SearchImg from "../../images/Search.svg";
 import IconRemove from "../../images/icon-remove.svg";
+import { tags } from "../../data";
 
 export default function Banner(props) {
 	const [searchTag, setSearchTag] = useState("");
+	const [suggestions, setSuggestions] = useState([]);
+	const [suggestionIndex, setSuggestionIndex] = useState(0);
+	const [suggestionsActive, setSuggestionsActive] = useState(false);
+	const [error, setError] = useState(false);
+	const [errorMsg, setErrorMsg] = useState("");
 
 	function handleChange(event) {
-		setSearchTag(event.currentTarget.value);
+		const filterValue = event.currentTarget.value;
+		const query = filterValue.toLowerCase();
+
+		setError(false);
+		setSearchTag(filterValue);
+
+		if (query.length > 0) {
+			const filterSuggestions = tags.filter(
+				(suggestion) => suggestion.toLowerCase().indexOf(query) > -1
+			);
+			setSuggestions(filterSuggestions);
+			setSuggestionsActive(true);
+		} else {
+			setSuggestionsActive(false);
+		}
+	}
+
+	function handleClick(event) {
+		setSuggestions([]);
+		setSearchTag(event.currentTarget.innerText);
+		setSuggestionsActive(false);
+	}
+
+	function handleKeyDown(event) {
+		// UP ARROW
+		if (event.keyCode === 38) {
+			if (suggestionIndex === 0) {
+				return;
+			}
+			setSuggestionIndex(suggestionIndex - 1);
+		}
+		// DOWN ARROW
+		else if (event.keyCode === 40) {
+			if (suggestionIndex - 1 === suggestions.length) {
+				return;
+			}
+			setSuggestionIndex(suggestionIndex + 1);
+		}
+		// ENTER
+		else if (event.keyCode === 13) {
+			setSearchTag(suggestions[suggestionIndex]);
+			setSuggestionIndex(0);
+			setSuggestionsActive(false);
+		}
 	}
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		props.handleFilters((prevState) => {
-			let prevArray = Array.from(prevState);
+		let tagsLC = tags.map((item) => item.toLowerCase());
+		let tagExists =
+			searchTag.length > 1 && tagsLC.includes(searchTag.toLowerCase());
+		let filtersArrayLC = Array.from(props.filters).map((item) =>
+			item.filter.toLowerCase()
+		);
+		let notInFilters = !filtersArrayLC.includes(searchTag.toLowerCase());
 
-			prevArray.push({ filterId: nanoid(), filter: searchTag });
-			return prevArray;
-		});
-		setSearchTag("");
+		if (tagExists && notInFilters) {
+			setError(false);
+			props.handleFilters((prevState) => {
+				let prevArray = Array.from(prevState);
+
+				prevArray.push({ filterId: nanoid(), filter: searchTag });
+				return prevArray;
+			});
+			setSearchTag("");
+		} else if (!tagExists) {
+			setSuggestionsActive(false);
+			setError(true);
+			setErrorMsg("Enter a valid tag name.");
+		} else if (!notInFilters) {
+			setSuggestionsActive(false);
+			setError(true);
+			setErrorMsg("Filter already exists.");
+		}
 	}
 
 	function handleRemoveAllFilters() {
@@ -56,6 +126,22 @@ export default function Banner(props) {
 		</Filter>
 	));
 
+	const populateSuggestions = (
+		<Suggestions>
+			{suggestions.map((suggestion, index) => {
+				return (
+					<li
+						className={index === suggestionIndex ? "active" : ""}
+						key={index}
+						onClick={(event) => handleClick(event)}
+					>
+						{suggestion}
+					</li>
+				);
+			})}
+		</Suggestions>
+	);
+
 	return (
 		<Wrapper>
 			<SearchBar>
@@ -67,7 +153,10 @@ export default function Banner(props) {
 							placeholder="search..."
 							value={searchTag}
 							onChange={(event) => handleChange(event)}
+							onKeyDown={(event) => handleKeyDown(event)}
 						/>
+						{suggestionsActive && populateSuggestions}
+						{error && <ErrorMsg>{errorMsg}</ErrorMsg>}
 						<button type="submit">
 							<img src={SearchImg} alt="Search" />
 						</button>

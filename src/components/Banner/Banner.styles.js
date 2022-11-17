@@ -47,7 +47,7 @@ export const Search = styled.form`
 	min-height: 38px;
 
 	input {
-		padding: 10px;
+		padding: 10px 20px;
 		width: 100%;
 		height: 100%;
 		border: 1px solid var(--lightCyanBorder);
@@ -104,4 +104,47 @@ export const Filter = styled.div`
 			background-color: var(--veryDarkGCyan);
 		}
 	}
+`;
+
+export const Suggestions = styled.ul`
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	border-radius: 4px;
+	background-color: var(--white);
+	color: var(--veryDarkGCyan);
+	filter: drop-shadow(6px 4px 6px var(--shadow));
+	z-index: 10;
+
+	li {
+		width: 100%;
+		padding: 10px 20px;
+		border-top: 1px solid var(--lightCyanBorder);
+		cursor: pointer;
+
+		&:hover {
+			background-color: var(--lightGCyanFTs);
+		}
+	}
+
+	li:first-child {
+		border: none;
+	}
+`;
+
+export const ErrorMsg = styled.div`
+	position: absolute;
+	width: 100%;
+	border-radius: 4px;
+	background-color: var(--white);
+	padding: 10px 20px;
+	color: var(--pastelRed);
+	filter: drop-shadow(6px 4px 6px var(--shadow));
+	z-index: 10;
 `;
