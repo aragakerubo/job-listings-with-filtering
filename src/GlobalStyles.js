@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
     :root {
+        --pastelRed: hsl(3, 94% , 68%);
         --white: hsl(0, 0%, 100%);
         --desatDarkCyan: hsl(180, 29%, 50%);
         --lightCyanBorder: hsla(180, 39%, 56%, 0.4);

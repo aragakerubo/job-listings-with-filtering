@@ -1,0 +1,17 @@
+export const tags = [
+	"CSS",
+	"Django",
+	"Frontend",
+	"Fullstack",
+	"HTML",
+	"JavaScript",
+	"Juniour",
+	"Midweight",
+	"Python",
+	"React",
+	"RoR",
+	"Ruby",
+	"Sass",
+	"Seniour",
+	"Vue",
+];
