@@ -1,7 +1,7 @@
 import React from "react";
 
 import { GlobalStyles } from "./GlobalStyles";
-import JobFilter from "./pages/Job-Filter";
+import JobFilter from "./pages/JobFilter";
 
 export default function App() {
 	return (

@@ -27,6 +27,7 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         -ms-overflow-style: none;
         scrollbar-width: none;
+        background-color: var(--lightGCyanBg);
 
         p, input {
             margin: 0;
