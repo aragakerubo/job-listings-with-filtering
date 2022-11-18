@@ -102,6 +102,8 @@ export default function Banner(props) {
 
 	function handleRemoveAllFilters() {
 		props.handleFilters([]);
+		setSearchTag("");
+		setError(false);
 	}
 
 	function handleRemoveFilter(event) {
