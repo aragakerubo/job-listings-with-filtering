@@ -88,9 +88,11 @@ export default function Banner(props) {
 		}
 		// ENTER
 		else if (event.keyCode === 13) {
-			setSearchTag(suggestions[suggestionIndex]);
-			setSuggestionIndex(0);
-			setSuggestionsActive(false);
+			if (suggestions.length > 0) {
+				setSearchTag(suggestions[suggestionIndex]);
+				setSuggestionIndex(0);
+				setSuggestionsActive(false);
+			}
 		}
 	}
 

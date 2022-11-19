@@ -133,6 +133,10 @@ export const Suggestions = styled.ul`
 		}
 	}
 
+	li.active {
+		background-color: var(--lightGCyanFTs);
+	}
+
 	li:first-child {
 		border: none;
 	}
