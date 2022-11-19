@@ -45,15 +45,30 @@ export default function Banner(props) {
 		setSuggestions([]);
 		setSearchTag("");
 		setSuggestionsActive(false);
-		props.handleFilters((prevState) => {
-			let prevArray = Array.from(prevState);
 
-			prevArray.push({
-				filterId: nanoid(),
-				filter: event.currentTarget.innerText,
+		let suggestionText = event.currentTarget.innerText;
+
+		let filtersArrayLC = Array.from(props.filters).map((item) =>
+			item.filter.toLowerCase()
+		);
+		let notInFilters = !filtersArrayLC.includes(
+			suggestionText.toLowerCase()
+		);
+
+		if (notInFilters) {
+			props.handleFilters((prevState) => {
+				let prevArray = Array.from(prevState);
+
+				prevArray.push({
+					filterId: nanoid(),
+					filter: suggestionText,
+				});
+				return prevArray;
 			});
-			return prevArray;
-		});
+		} else if (!notInFilters) {
+			setError(true);
+			setErrorMsg("Filter already exists.");
+		}
 	}
 
 	function handleKeyDown(event) {
