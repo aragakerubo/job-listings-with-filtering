@@ -43,8 +43,17 @@ export default function Banner(props) {
 
 	function handleClick(event) {
 		setSuggestions([]);
-		setSearchTag(event.currentTarget.innerText);
+		setSearchTag("");
 		setSuggestionsActive(false);
+		props.handleFilters((prevState) => {
+			let prevArray = Array.from(prevState);
+
+			prevArray.push({
+				filterId: nanoid(),
+				filter: event.currentTarget.innerText,
+			});
+			return prevArray;
+		});
 	}
 
 	function handleKeyDown(event) {
