@@ -81,7 +81,7 @@ export default function Banner(props) {
 		}
 		// DOWN ARROW
 		else if (event.keyCode === 40) {
-			if (suggestionIndex - 1 === suggestions.length) {
+			if (suggestionIndex === suggestions.length - 1) {
 				return;
 			}
 			setSuggestionIndex(suggestionIndex + 1);
