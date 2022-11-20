@@ -29,6 +29,7 @@ export default function Banner(props) {
 
 		setError(false);
 		setSearchTag(filterValue);
+		setSuggestionIndex(0);
 
 		if (query.length > 0) {
 			const filterSuggestions = tags.filter(
