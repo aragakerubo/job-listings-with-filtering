@@ -20,7 +20,7 @@ export const SearchBar = styled.div`
 	width: 80%;
 	max-width: 1110px;
 	min-height: 72px;
-	border-radius: ;
+	border-radius: 5px;
 	left: 0;
 	right: 0;
 	bottom: -36px;
@@ -29,6 +29,10 @@ export const SearchBar = styled.div`
 	background: #ffffff;
 	box-shadow: 0px 15px 20px -5px var(--shadow);
 	border-radius: 5px;
+
+	@media (max-width: 1000px) {
+		visibility: hidden;
+	}
 `;
 
 export const Container = styled.div`
@@ -68,6 +72,16 @@ export const Search = styled.form`
 		border: transparent;
 		cursor: pointer;
 		outline: 0;
+	}
+
+	@media (max-width: 1000px) {
+		visibility: visible;
+		position: absolute;
+		width: 100%;
+		max-width: none;
+		bottom: 19px;
+		left: 0;
+		right: 0;
 	}
 `;
 
