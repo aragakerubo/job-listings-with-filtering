@@ -1,25 +1,39 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-	width: 95%;
+	position: relative;
+	width: 80%;
 	max-width: 1110px;
 	min-height: 155px;
 	background: var(--white);
 	box-shadow: 0px 15px 20px -5px var(--shadow);
 	border-radius: 5px;
-	overflow: hidden;
 `;
 
 export const MainWrap = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	gap: 2em;
 	width: 100%;
 	min-height: 155px;
+	border-radius: 5px;
+
 	border-left: ${(props) =>
 		props.featuredTag ? "5px solid var(--desatDarkCyan)" : "none"};
 	padding: ${(props) =>
 		props.featuredTag ? "30px 40px 30px 35px" : "30px 40px"};
+
+	@media (max-width: 1000px) {
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+	}
+
+	@media (max-width: 760px) {
+		padding: ${(props) =>
+			props.featuredTag ? "50px 25px 25px 20px" : "50px 25px 25px 25px"};
+	}
 `;
 
 export const Container = styled.div`
@@ -27,16 +41,36 @@ export const Container = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	gap: 1.5em;
+
+	@media (max-width: 1000px) {
+		padding-bottom: 1em;
+		border-bottom: 0.5px solid var(--darkGCyan);
+	}
 `;
 
 export const ContainerFTags = styled(Container)`
+	justify-content: flex-end;
 	gap: 16px;
+	flex-wrap: wrap;
+	border: none;
+	padding: 0;
+
+	@media (max-width: 760px) {
+		justify-content: flex-start;
+	}
 `;
 
 export const Profile = styled.img`
 	width: 90px;
 	height: 90px;
 	border-radius: 50%;
+
+	@media (max-width: 760px) {
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		top: -30px;
+	}
 `;
 
 export const Details = styled.div`
@@ -51,7 +85,7 @@ export const NameTags = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 0.5em;
+	gap: 1em;
 `;
 
 export const CompanyName = styled.h4`
@@ -59,7 +93,17 @@ export const CompanyName = styled.h4`
 	font-weight: 700;
 	font-size: 18px;
 	line-height: 17px;
-	margin: 0 0.5em 0 0;
+
+	@media (max-width: 760px) {
+		font-size: 13px;
+		line-height: 12px;
+	}
+`;
+
+export const MainTagsList = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
 `;
 
 export const MainTag = styled.span`
@@ -80,6 +124,10 @@ export const MainTag = styled.span`
 	font-weight: 700;
 	vertical-align: middle;
 	text-align: center;
+
+	@media (max-width: 760px) {
+		font-size: 12px;
+	}
 `;
 
 export const JobRole = styled.h2`
@@ -93,6 +141,10 @@ export const JobRole = styled.h2`
 	&:hover {
 		color: var(--desatDarkCyan);
 	}
+
+	@media (max-width: 760px) {
+		font-size: 17px;
+	}
 `;
 
 export const JobInfo = styled.p`
@@ -105,9 +157,10 @@ export const JobInfo = styled.p`
 
 export const JobInfoList = styled.div`
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
-	gap: 14px;
+	gap: 10px;
+	flex-wrap: wrap;
 `;
 
 export const FilterTag = styled.p`

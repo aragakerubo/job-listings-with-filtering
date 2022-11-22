@@ -15,6 +15,7 @@ import {
 	JobInfo,
 	JobInfoList,
 	FilterTag,
+	MainTagsList,
 } from "./JobListing.styles";
 
 export default function JobListing(props) {
@@ -50,7 +51,9 @@ export default function JobListing(props) {
 					<Details>
 						<NameTags>
 							<CompanyName>{props.data.CompanyName}</CompanyName>
-							{props.data.MainTags && MainTags}
+							<MainTagsList>
+								{props.data.MainTags && MainTags}
+							</MainTagsList>
 						</NameTags>
 						<JobRole>{props.data.JobRole}</JobRole>
 						<JobInfoList>
