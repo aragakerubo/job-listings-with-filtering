@@ -89,6 +89,7 @@ export const NameTags = styled.div`
 `;
 
 export const CompanyName = styled.h4`
+	margin: 0;
 	color: var(--desatDarkCyan);
 	font-weight: 700;
 	font-size: 18px;
